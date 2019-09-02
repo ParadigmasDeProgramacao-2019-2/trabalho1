@@ -18,11 +18,10 @@ menu = do
 executar :: Char -> IO()
 executar '1' = do
    
-    --Cadastra os jogadores
-    jogadores <- cadastraJogador 1 []
-    jogadores <- cadastraJogador 2 jogadores
+    --Cadastra o jogador
+    jogador <- cadastraJogador
     --Inicia um novo jogo
-    novoJogo jogadores
+    novoJogo
     return ()
 
 executar '0' = do
@@ -34,9 +33,9 @@ executar _ = do
     getChar
     menu
 
-novoJogo :: Jogadores -> IO()
-novoJogo jogadores = do
+novoJogo :: IO()
+novoJogo = do
     system("clear")
-    putStrLn("Os 1's equivalem às peças do Jogador 1 e os 2's às do Jogador 2")
+    putStrLn("O - Espaços com Peça\n. - Espaços sem Peça")
     -- Comeca com o primeiro jogador
-    novaPartida 1 [1..64]
+    novaPartida [1..33]

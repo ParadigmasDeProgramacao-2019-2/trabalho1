@@ -9,10 +9,11 @@ type EhDama = Bool --Informa se a peça já se tornou dama
 type Posicao = (Int, Int) --Localização da peca na matriz
 data Peca = Peca Jogador Posicao EhDama deriving (Show)
 
-novaPartida :: Int -> Tabuleiro -> IO()
-novaPartida id tabuleiro = do
+novaPartida :: Tabuleiro -> IO()
+novaPartida tabuleiro = do
     system("clear")
-    putStrLn("Vez do Jogador " ++ show id)
+    return ()
+    -- Instruções do Jogo
 
 -- Renderizar tabuleiro
 renderLinhasAux :: Int -> IO()
