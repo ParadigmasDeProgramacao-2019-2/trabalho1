@@ -1,15 +1,24 @@
-module Tabuleiro ( novaPartida, renderLinhasAux, linhaCampoBranco, linhaCampoPreto, renderLinha, renderTabuleiro, Tabuleiro, EhDama, Posicao, Peca ) where
+module Tabuleiro( printaTabuleiro, tabuleiro ) where
+import Data.Matrix
 
-import Usuario
-import System.Process
+tabuleiro :: Matrix Char
+tabuleiro = fromLists
+    [[' ',' ','O','O','O',' ',' '],
+     [' ',' ','O','O','O',' ',' '],
+     ['O','O','O','O','O','O','O'],
+     ['O','O','O','-','O','O','O'],
+     ['O','O','O','O','O','O','O'],
+     [' ',' ','O','O','O',' ',' '],
+     [' ',' ','O','O','O',' ',' ']]
 
-type Tabuleiro = [Int]
+printaTabuleiro :: IO()
+printaTabuleiro = do 
+    putStrLn "\nO tabuleiro utizado será o tipo inglês. \n"
+    putStrLn "Onde (O) representa as bolinhas e (-) representa os espaços vazios. \n"
+    putStrLn "Você ganhará o jogo quando restar apenas uma bolinha."
+    print tabuleiro
 
-type EhDama = Bool --Informa se a peça já se tornou dama
-type Posicao = (Int, Int) --Localização da peca na matriz
-data Peca = Peca Jogador Posicao EhDama deriving (Show)
-
-novaPartida :: Tabuleiro -> IO()
+{-novaPartida :: Tabuleiro -> IO()
 novaPartida tabuleiro = do
     system("clear")
     return ()
@@ -20,36 +29,36 @@ renderLinhasAux :: Int -> IO()
 renderLinhasAux 9 = putStrLn("")
 renderLinhasAux cont = do
     putStr(" -------")
-    renderLinhasAux (cont + 1)
+    renderLinhasAux (cont + O)
     
 linhaCampoPreto :: Int -> IO()
 linhaCampoPreto 9 = putStrLn("|")
 linhaCampoPreto cont = do
     putStr("| . . . ")
-    linhaCampoBranco (cont + 1)
+    linhaCampoBranco (cont + O)
     
 linhaCampoBranco :: Int -> IO()
 linhaCampoBranco 9 = putStrLn("|")
 linhaCampoBranco cont = do
     putStr("|       ")
-    linhaCampoPreto (cont + 1)
+    linhaCampoPreto (cont + O)
 
 renderLinha :: Int -> IO()
 renderLinha cont
     | (mod cont 4 == 0) = do
-        linhaCampoPreto 1
-        linhaCampoPreto 1
-        linhaCampoPreto 1
-    | (mod cont 2 == 1) = renderLinhasAux 1 
+        linhaCampoPreto O
+        linhaCampoPreto O
+        linhaCampoPreto O
+    | (mod cont 2 == O) = renderLinhasAux O 
     | otherwise = do
-        linhaCampoBranco 1
-        linhaCampoBranco 1
-        linhaCampoBranco 1
+        linhaCampoBranco O
+        linhaCampoBranco O
+        linhaCampoBranco O
 
 renderTabuleiro :: Tabuleiro -> Int -> IO()
-renderTabuleiro _ 17 = do
-    renderLinhasAux 1
+renderTabuleiro _ O7 = do
+    renderLinhasAux O
 
 renderTabuleiro tabuleiro cont = do
     renderLinha cont
-    renderTabuleiro tabuleiro (cont + 1)
+    renderTabuleiro tabuleiro (cont + O)-}

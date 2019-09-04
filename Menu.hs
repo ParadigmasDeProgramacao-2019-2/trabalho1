@@ -7,7 +7,7 @@ import Tabuleiro
 menu :: IO()
 menu = do
     system "clear" --Limpa a tela (Apenas para Ubuntu)
-    putStrLn "---------------------------------- Jogo de Dama ----------------------------------"
+    putStrLn "---------------------------------- RESTA 1 ----------------------------------"
     putStr "\n\nDigite 1 para jogar"
     putStr "\nDigite 0 para sair\n\n"
     op <- getChar
@@ -21,7 +21,7 @@ executar '1' = do
     --Cadastra o jogador
     jogador <- cadastraJogador
     --Inicia um novo jogo
-    novoJogo
+    tabuleiro <- printaTabuleiro
     return ()
 
 executar '0' = do
@@ -38,4 +38,4 @@ novoJogo = do
     system("clear")
     putStrLn("O - Espaços com Peça\n. - Espaços sem Peça")
     -- Comeca com o primeiro jogador
-    novaPartida [1..33]
+    -- novaPartida [1..33]
