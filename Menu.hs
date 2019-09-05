@@ -21,7 +21,7 @@ executar '1' = do
     --Cadastra o jogador
     jogador <- cadastraJogador
     --Inicia um novo jogo
-    tabuleiro <- printaTabuleiro
+    printarTabuleiro tabuleiro
     return ()
 
 executar '0' = do
