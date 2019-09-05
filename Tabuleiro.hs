@@ -11,18 +11,30 @@ module Tabuleiro(
     printarColuna
 ) where
 
-import Data.Matrix
+import Data.Matrix 
+import Data.List hiding (transpose)
 
 tabuleiro :: Matrix Char
 tabuleiro = fromLists
     [[' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' '],
      ['O','O','O','O','O','O','O'],
-     ['O','O','O','-','O','O','O'],
+     ['O','O','O','O','O','O','O'],
      ['O','O','O','O','O','O','O'],
      [' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' ']]
 
+
+verificaLinhas :: [[Char]] -> Bool
+verificaLinhas [] = False
+verificaLinhas (xs:xss) = verificaLinha xs || verificaLinhas xss
+
+verificaLinha :: [Char] -> Bool
+verificaLinha linha = isInfixOf ['O','O','-'] linha || isInfixOf ['-','O','O'] linha
+
+haJogadaValida :: Matrix Char -> Bool
+haJogadaValida tabuleiro = do
+    verificaLinhas (toLists tabuleiro) || verificaLinhas (toLists (transpose tabuleiro))
 
 {--
     Função responsável por chamar o print do Tabuleiro,
