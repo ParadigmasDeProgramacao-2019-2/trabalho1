@@ -10,7 +10,7 @@ module Tabuleiro(
     printarLinha,
     printarColuna
 ) where
-    
+
 import Data.Matrix
 
 tabuleiro :: Matrix Char

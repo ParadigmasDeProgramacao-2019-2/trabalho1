@@ -3,6 +3,9 @@ module Movimento (pegaLinha, pegaColuna, pegaDirecao) where
 import Data.Char
 import Validacoes
 
+{--
+    Função para capturar o input da linha
+--}
 pegaLinha :: IO Int
 pegaLinha = do
     putStrLn "Digite a linha da peca que vai se movimentar [1..7]:"
@@ -14,6 +17,9 @@ pegaLinha = do
         else do
             return (read linhaInput)
 
+{--
+    Mapeamento das letras das colunas com numeros da matriz
+--}
 mapeiaLetraColuna :: Char -> Int
 mapeiaLetraColuna 'A' = 1
 mapeiaLetraColuna 'B' = 2
@@ -24,6 +30,9 @@ mapeiaLetraColuna 'F' = 6
 mapeiaLetraColuna 'G' = 7
 mapeiaLetraColuna  _  = 8
 
+{--
+    Função para capturar o input da coluna
+--}
 pegaColuna :: IO Int
 pegaColuna = do
     putStrLn "Digite a coluna da peca que vai se movimentar [A..G]:"
@@ -36,7 +45,9 @@ pegaColuna = do
         else do
             return (mapeiaLetraColuna (toUpper colunaInput))
 
-
+{--
+    Função para capturar o input da direcao
+--}
 pegaDirecao :: IO Int
 pegaDirecao = do
     putStrLn "Digite a direção [1 - Para Cima; 2 - Para Baixo; 3 - Para Esquerda; 4 - Para Direita]:"
