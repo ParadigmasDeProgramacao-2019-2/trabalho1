@@ -69,21 +69,3 @@ defineDestinoMatriz linha coluna 1 incremento = (linha - incremento, coluna)
 defineDestinoMatriz linha coluna 2 incremento = (linha + incremento, coluna) 
 defineDestinoMatriz linha coluna 3 incremento = (linha, coluna - incremento) 
 defineDestinoMatriz linha coluna 4 incremento = (linha, coluna + incremento) 
-
-{--
-    Função para pegar os movimentos e realizar a jogada
---}
-pegaMovimento :: Matrix Char -> IO()
-pegaMovimento tabuleiro = do
-    printarTabuleiro tabuleiro
-    linha <- pegaLinha
-    coluna <- pegaColuna
-    direcao <- pegaDirecao
-    fazJogada linha coluna direcao tabuleiro
-
-{--
-    Função para realizar a jogada, alterar os 3 elementos que sao alterados ao fazer uma jogada
---}    
-fazJogada :: Int -> Int -> Int -> Matrix Char -> IO()
-fazJogada linha coluna direcao tabuleiro = do
-    pegaMovimento (setElem '-' (linha, coluna) (setElem '-' (defineDestinoMatriz linha coluna direcao 1) (setElem 'O' (defineDestinoMatriz linha coluna direcao 2) tabuleiro)))

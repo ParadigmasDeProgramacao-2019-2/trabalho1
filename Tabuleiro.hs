@@ -26,29 +26,13 @@ tabuleiro = fromLists
      [' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' ']]
 
-
-verificaLinhas :: [[Char]] -> Bool
-verificaLinhas [] = False
-verificaLinhas (xs:xss) = verificaLinha xs || verificaLinhas xss
-
-verificaLinha :: [Char] -> Bool
-verificaLinha linha = isInfixOf ['O','O','-'] linha || isInfixOf ['-','O','O'] linha
-
-haJogadaValida :: Matrix Char -> Bool
-haJogadaValida tabuleiro = do
-    verificaLinhas (toLists tabuleiro) || verificaLinhas (toLists (transpose tabuleiro))
-
 {--
     Função responsável por chamar o print do Tabuleiro,
     primeira função a ser chamada
 --}
 printarTabuleiro :: Matrix Char -> IO()
 printarTabuleiro mat = do
-    putStrLn "\nO tabuleiro utizado será o tipo inglês. \n"
-    putStrLn "Onde os campos cheios são as peças e os vazios são os espaços vagos \n"
-    putStrLn "Você ganhará o jogo quando restar apenas uma peça."
-    putStrLn("")
-    putStr("  ")
+    putStr("   ")
     printarGuiaColuna mat 1
 
 {--

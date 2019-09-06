@@ -1,8 +1,11 @@
-module Menu ( menu, executar, novoJogo) where
+module Menu ( menu, executar, novoJogo, jogoLoop) where
 
 import System.Process
+import Data.Matrix
 import Usuario
 import Tabuleiro
+import Validacoes
+import Movimento
 
 menu :: IO()
 menu = do
@@ -21,7 +24,7 @@ executar '1' = do
     --Cadastra o jogador
     jogador <- cadastraJogador
     --Inicia um novo jogo
-    printarTabuleiro tabuleiro
+    novoJogo jogador tabuleiro
     return ()
 
 executar '0' = do
@@ -33,9 +36,43 @@ executar _ = do
     getChar
     menu
 
-novoJogo :: IO()
-novoJogo = do
+novoJogo :: Jogador -> Matrix Char -> IO()
+novoJogo jogador tabuleiro = do
     system("clear")
-    putStrLn("O - Espaços com Peça\n. - Espaços sem Peça")
-    -- Comeca com o primeiro jogador
-    -- novaPartida [1..33]
+    putStrLn "\nO tabuleiro utizado será o tipo inglês. \n"
+    putStrLn "Onde os campos cheios são as peças e os vazios são os espaços vagos \n"
+    putStrLn "Você ganhará o jogo quando restar apenas uma peça."
+    putStrLn("")
+    putStr "\nPressione <Enter> para iniciar o jogo\n"
+    getChar
+    jogoLoop jogador tabuleiro
+
+{--
+Função para pegar os movimentos e realizar a jogada
+--}
+pegaMovimento :: Jogador -> Matrix Char -> IO()
+pegaMovimento jogador tabuleiro = do
+    printarTabuleiro tabuleiro
+    linha <- pegaLinha
+    coluna <- pegaColuna
+    direcao <- pegaDirecao
+    fazJogada jogador linha coluna direcao tabuleiro
+
+{--
+    Função para realizar a jogada, alterar os 3 elementos que sao alterados ao fazer uma jogada
+--}    
+fazJogada :: Jogador -> Int -> Int -> Int -> Matrix Char -> IO()
+fazJogada jogador linha coluna direcao tabuleiro = do
+    jogoLoop jogador (setElem '-' (linha, coluna) (setElem '-' (defineDestinoMatriz linha coluna direcao 1) (setElem 'O' (defineDestinoMatriz linha coluna direcao 2) tabuleiro)))
+
+jogoLoop :: Jogador -> Matrix Char -> IO()
+jogoLoop jogador tabuleiro 
+    | haJogadaValida tabuleiro = 
+        do
+            pegaMovimento jogador tabuleiro
+    | otherwise =
+        do
+            if ((checarQuatPecas tabuleiro) ==  1) then
+                print "Parabens, ganhou"
+            else
+                print "Perdeu"
