@@ -38,7 +38,10 @@ verificaLinhas (xs:xss) = verificaLinha xs || verificaLinhas xss
 haJogadaValida :: Matrix Char -> Bool
 haJogadaValida tabuleiro = do
     verificaLinhas (toLists tabuleiro) || verificaLinhas (toLists (transpose tabuleiro))
-    
+
+{--
+    Valida os espacos invalidos da matriz de tabuleiro
+--}
 validaEspacoInvalido :: Int -> Int -> Bool
 validaEspacoInvalido linha col
     | linha == 1 && col == 1 || linha == 1 && col == 2 = False

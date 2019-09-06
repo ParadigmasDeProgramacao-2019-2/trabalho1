@@ -19,6 +19,9 @@ module Tabuleiro(
 import Data.Matrix 
 import Utils
 
+{--
+    Tabuleiro inicial do jogo, resta um padrao ingles
+--}
 tabuleiro :: Matrix Char
 tabuleiro = fromLists
     [[' ',' ','O','O','O',' ',' '],
@@ -52,7 +55,6 @@ printarGuiaColuna :: Matrix Char -> Int -> IO()
 printarGuiaColuna mat 8 = do
     putStrLn("")
     printarLinha mat 1 1 guiasVerticais
-
 printarGuiaColuna mat cont = do
     putStr("  "++ show cont ++ "  ")
     printarGuiaColuna mat (cont + 1)
@@ -155,7 +157,7 @@ verificaPosicao :: Matrix Char -> Int -> Int -> Int -> Bool
 verificaPosicao tabuleiro linha coluna direcao = naoEhVazio (verificaPosicaoOrigem tabuleiro linha coluna) && naoEhVazio (verificaPosicaoIntermediaria tabuleiro linha coluna direcao) && ehVazio (verificaPosicaoDestino tabuleiro linha coluna direcao)
 
 {--
-    Função para calcular quantidade de peças
+    Função para calcular quantidade de peças no tabuleiro
 --}
 checarQuatPecas :: Matrix Char -> Int 
 checarQuatPecas tabuleiro = 

@@ -11,6 +11,9 @@ main :: IO()
 main = do
     menu
 
+{--
+    Menu inicial do jogo
+--}
 menu :: IO()
 menu = do
     system "clear" --Limpa a tela (Apenas para Ubuntu)
@@ -22,6 +25,9 @@ menu = do
     executar op
     return ()
 
+{--
+    Executa a operacao indicada pelo usuario no menu
+--}
 executar :: Char -> IO()
 executar '1' = do
     --Cadastra o jogador
@@ -29,16 +35,17 @@ executar '1' = do
     --Inicia um novo jogo
     novoJogo jogador tabuleiro
     return ()
-
 executar '0' = do
     return ()
-
 executar _ = do
     putStrLn ("\nOpção inválida! Tente novamente")
     putStr "\nPressione <Enter> para voltar ao menu\n"
     getChar
     menu
 
+{--
+    Mostra regras para o usuario
+--}
 printaRegras :: IO()
 printaRegras = do
     system("clear")
@@ -47,6 +54,9 @@ printaRegras = do
     putStrLn "Você ganhará o jogo quando restar apenas uma peça."
     putStrLn("")
 
+{--
+    Cria um novo jogo mostrando as regras e chamando o loop do jogo
+--}
 novoJogo :: Jogador -> Matrix Char -> IO()
 novoJogo jogador tabuleiro = do
     printaRegras
@@ -63,12 +73,20 @@ pegaMovimento jogador tabuleiro = do
     linha <- pegaLinha
     coluna <- pegaColuna
     direcao <- pegaDirecao
-    if (validaEspacoInvalido linha coluna == False )
+    if (validaEspacoInvalido linha coluna == False)
         then do
             system("clear")
             putStrLn "Espaço Não ultilizado no tabuleiro"
+            putStrLn "<enter> para continuar"
             getChar 
             pegaMovimento jogador tabuleiro
+        else if ((verificaPosicao tabuleiro linha coluna direcao) == False)
+            then do
+                system("clear")
+                putStrLn "Jogada invalida"
+                putStrLn "<enter> para continuar"
+                getChar
+                pegaMovimento jogador tabuleiro
         else do
             jogoLoop jogador (fazJogada linha coluna direcao tabuleiro)
 
