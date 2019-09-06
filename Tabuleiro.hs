@@ -9,22 +9,26 @@ module Tabuleiro(
     printarPosicaoAtual,
     printarLinha,
     printarColuna,
-    verificaPecaOrigem,
+    verificaPosicaoOrigem,
+    verificaPosicaoIntermediaria,
+    verificaPosicaoDestino,
+    verificaPosicao,
     checarQuatPecas
 ) where
 
 import Data.Matrix 
 import Data.List hiding (transpose)
+import Utils
 
 tabuleiro :: Matrix Char
 tabuleiro = fromLists
-    [[' ',' ','O','O','O',' ',' '],
+    [[' ',' ','-','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' '],
      ['O','O','O','O','O','O','O'],
-     ['O','O','O','-','O','O','O'],
+     ['O','O','O','O','O','O','O'],
      ['O','O','O','O','O','O','O'],
      [' ',' ','O','O','O',' ',' '],
-     [' ',' ','O','O','O',' ',' ']]
+     [' ',' ','O','O','-',' ',' ']]
 
 {--
     Função responsável por chamar o print do Tabuleiro,
@@ -124,17 +128,32 @@ printarColuna mat row col = do
 {--
     Verifica se posição de origem contém peça
 --}
-verificaPecaOrigem :: Matrix Char -> Int -> Int -> Char
-verificaPecaOrigem tabuleiro linha coluna = getElem linha coluna tabuleiro 
+verificaPosicaoOrigem :: Matrix Char -> Int -> Int -> Char
+verificaPosicaoOrigem tabuleiro linha coluna = getElem linha coluna tabuleiro 
 
 {--
     Verifica se posição de destino contém peça
 --}
-
+verificaPosicaoDestino :: Matrix Char -> Int -> Int -> Int -> Char
+verificaPosicaoDestino tabuleiro linha coluna 1 = getElem (linha - 2) coluna tabuleiro
+verificaPosicaoDestino tabuleiro linha coluna 2 = getElem (linha + 2) coluna tabuleiro
+verificaPosicaoDestino tabuleiro linha coluna 3 = getElem linha (coluna - 2) tabuleiro 
+verificaPosicaoDestino tabuleiro linha coluna 4 = getElem linha (coluna + 2) tabuleiro
 
 {--
     Verifica se posição intermediária contém peça
 --}
+verificaPosicaoIntermediaria :: Matrix Char -> Int -> Int -> Int -> Char
+verificaPosicaoIntermediaria tabuleiro linha coluna 1 = getElem (linha - 1) coluna tabuleiro
+verificaPosicaoIntermediaria tabuleiro linha coluna 2 = getElem (linha + 1) coluna tabuleiro
+verificaPosicaoIntermediaria tabuleiro linha coluna 3 = getElem linha (coluna - 1) tabuleiro 
+verificaPosicaoIntermediaria tabuleiro linha coluna 4 = getElem linha (coluna + 1) tabuleiro
+
+{--
+    Verifica se posições são válidas
+--}
+verificaPosicao :: Matrix Char -> Int -> Int -> Int -> Bool
+verificaPosicao tabuleiro linha coluna direcao = naoEhVazio (verificaPosicaoOrigem tabuleiro linha coluna) && naoEhVazio (verificaPosicaoIntermediaria tabuleiro linha coluna direcao) && ehVazio (verificaPosicaoDestino tabuleiro linha coluna direcao)
 
 {--
     Função para calcular quantidade de peças
