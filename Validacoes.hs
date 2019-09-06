@@ -1,4 +1,4 @@
-module Validacoes (validaEntradaLinhaColuna, validaEntradaDirecao, verificaLinha, verificaLinhas, haJogadaValida, validaEspacoInvalido) where
+module Validacoes (validaEntradaLinhaColuna, validaEntradaDirecao, verificaLinha, verificaLinhas, haJogadaValida, validaEspacoInvalido, validaMovimentoDentroMatriz) where
 
 import Data.Matrix
 import Data.List hiding (transpose)
@@ -52,4 +52,22 @@ validaEspacoInvalido linha col
     | linha == 7 && col == 1 || linha == 7 && col == 2 = False
     | linha == 6 && col == 6 ||  linha == 6 && col == 7 = False
     | linha == 7 && col == 6 ||  linha == 7 && col == 7 = False
+    | otherwise = True
+
+{--
+    Valida se o movimento respeita os extremos da matriz
+--}
+validaMovimentoDentroMatriz :: Int -> Int -> Int -> Bool
+validaMovimentoDentroMatriz linha coluna direcao 
+    | coluna <= 2 && direcao == 3 = False
+    | coluna >= 6 && direcao == 4 = False
+    | linha >= 6 && direcao == 2 = False
+    | linha <= 2 && direcao == 1 = False
+    | linha <= 2 && coluna >= 3 && coluna <= 5 && direcao == 1 = False
+    | linha == 3 && (coluna <= 2 || coluna >= 6) && direcao == 1 = False
+    | linha == 5 && (coluna <= 2 || coluna >= 6) && direcao == 2 = False
+    | linha >= 6 && coluna >= 3 && coluna <= 5 && direcao == 2 = False
+    | coluna == 4 && (linha <= 2 || linha >= 6) && (direcao == 3 || direcao == 4) = False
+    | coluna == 3 && (linha <= 2 || linha >= 6) && direcao == 3 = False
+    | coluna == 5 && (linha <= 2 || linha >= 6) && direcao == 4 = False
     | otherwise = True

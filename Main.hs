@@ -73,7 +73,7 @@ pegaMovimento jogador tabuleiro = do
     linha <- pegaLinha
     coluna <- pegaColuna
     direcao <- pegaDirecao
-    if (validaEspacoInvalido linha coluna == False)
+    if ((validaMovimentoDentroMatriz linha coluna direcao) == False || validaEspacoInvalido linha coluna == False)
         then do
             system("clear")
             putStrLn "Espaço Não ultilizado no tabuleiro"
