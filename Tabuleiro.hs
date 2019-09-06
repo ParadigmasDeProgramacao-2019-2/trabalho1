@@ -8,7 +8,8 @@ module Tabuleiro(
     printarLinhaAux,
     printarPosicaoAtual,
     printarLinha,
-    printarColuna
+    printarColuna,
+    checarQuatPecas
 ) where
 
 import Data.Matrix 
@@ -19,7 +20,7 @@ tabuleiro = fromLists
     [[' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' '],
      ['O','O','O','O','O','O','O'],
-     ['O','O','O','O','O','O','O'],
+     ['O','O','O','-','O','O','O'],
      ['O','O','O','O','O','O','O'],
      [' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' ']]
@@ -135,3 +136,11 @@ printarColuna mat row col = do
     printarPosicaoAtual mat row col
     printarColuna mat row (col + 1)
 
+{--
+    Função para calcular quantidade de peças
+--}
+
+checarQuatPecas :: Matrix Char -> Int 
+checarQuatPecas tabuleiro = 
+    let listaTabuleiro = toList tabuleiro in     
+    (length [a | a <- listaTabuleiro, a == 'O']) 
