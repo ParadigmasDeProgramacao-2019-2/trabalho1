@@ -15,6 +15,7 @@ module Tabuleiro(
 
 import Data.Matrix 
 import Data.List hiding (transpose)
+import Utils
 
 tabuleiro :: Matrix Char
 tabuleiro = fromLists
@@ -146,12 +147,24 @@ verificaPecaOrigem tabuleiro linha coluna = getElem linha coluna tabuleiro
 {--
     Verifica se posição de destino contém peça
 --}
-
+verificaPecaDestino :: Matrix Char -> Int -> Int -> Int -> Char
+verificaPecaDestino tabuleiro linha coluna 1 = getElem (linha - 2) coluna tabuleiro
+verificaPecaDestino tabuleiro linha coluna 2 = getElem (linha + 2) coluna tabuleiro
+verificaPecaDestino tabuleiro linha coluna 3 = getElem linha (coluna - 2) tabuleiro 
+verificaPecaDestino tabuleiro linha coluna 4 = getElem linha (coluna + 2) tabuleiro
 
 {--
     Verifica se posição intermediária contém peça
 --}
+verificaPecaIntermediaria :: Matrix Char -> Int -> Int -> Int -> Char
+verificaPecaIntermediaria tabuleiro linha coluna 1 = getElem (linha - 1) coluna tabuleiro
+verificaPecaIntermediaria tabuleiro linha coluna 2 = getElem (linha + 1) coluna tabuleiro
+verificaPecaIntermediaria tabuleiro linha coluna 3 = getElem linha (coluna - 1) tabuleiro 
+verificaPecaIntermediaria tabuleiro linha coluna 4 = getElem linha (coluna + 1) tabuleiro
 
+
+{--verificaPecas :: Matrix Char -> Int -> Int -> Int -> Bool
+verificaPecas tabuleiro linha coluna = eVazio(verificaPecaDestino tabuleiro linha coluna direcao)--}
 {--
     Função para calcular quantidade de peças
 --}
