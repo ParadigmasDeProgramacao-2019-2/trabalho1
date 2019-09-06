@@ -17,7 +17,6 @@ module Tabuleiro(
 ) where
 
 import Data.Matrix 
-import Data.List hiding (transpose)
 import Utils
 
 tabuleiro :: Matrix Char
