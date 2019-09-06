@@ -6,6 +6,7 @@ import Usuario
 import Tabuleiro
 import Validacoes
 import Movimento
+import Data.Char
 
 menu :: IO()
 menu = do
@@ -56,7 +57,14 @@ pegaMovimento jogador tabuleiro = do
     linha <- pegaLinha
     coluna <- pegaColuna
     direcao <- pegaDirecao
-    fazJogada jogador linha coluna direcao tabuleiro
+    if (validaEspacoInvalido linha coluna == False )
+        then do
+            system("clear")
+            putStrLn "Espaço Não ultilizado no tabuleiro"
+            getChar 
+            pegaMovimento jogador tabuleiro
+        else do
+            fazJogada jogador linha coluna direcao tabuleiro
 
 {--
     Função para realizar a jogada, alterar os 3 elementos que sao alterados ao fazer uma jogada

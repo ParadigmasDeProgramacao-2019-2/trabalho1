@@ -1,4 +1,4 @@
-module Validacoes (validaEntradaLinhaColuna, validaEntradaDirecao, verificaLinha, verificaLinhas, haJogadaValida) where
+module Validacoes (validaEntradaLinhaColuna, validaEntradaDirecao, verificaLinha, verificaLinhas, haJogadaValida, validaEspacoInvalido) where
 
 import Data.Matrix
 import Data.List hiding (transpose)
@@ -39,3 +39,14 @@ haJogadaValida :: Matrix Char -> Bool
 haJogadaValida tabuleiro = do
     verificaLinhas (toLists tabuleiro) || verificaLinhas (toLists (transpose tabuleiro))
     
+validaEspacoInvalido :: Int -> Int -> Bool
+validaEspacoInvalido linha col
+    | linha == 1 && col == 1 || linha == 1 && col == 2 = False
+    | linha == 2 && col == 1 || linha == 2 && col == 2 = False
+    | linha == 1 && col == 6 ||  linha == 1 && col == 7 = False
+    | linha == 2 && col == 6 ||  linha == 2 && col == 7 = False
+    | linha == 6 && col == 1 || linha == 6 && col == 2 = False
+    | linha == 7 && col == 1 || linha == 7 && col == 2 = False
+    | linha == 6 && col == 6 ||  linha == 6 && col == 7 = False
+    | linha == 7 && col == 6 ||  linha == 7 && col == 7 = False
+    | otherwise = True
