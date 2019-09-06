@@ -22,13 +22,13 @@ import Utils
 
 tabuleiro :: Matrix Char
 tabuleiro = fromLists
-    [[' ',' ','-','O','O',' ',' '],
+    [[' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' '],
      ['O','O','O','O','O','O','O'],
-     ['O','O','O','O','O','O','O'],
+     ['O','O','O','-','O','O','O'],
      ['O','O','O','O','O','O','O'],
      [' ',' ','O','O','O',' ',' '],
-     [' ',' ','O','O','-',' ',' ']]
+     [' ',' ','O','O','O',' ',' ']]
 
 {--
     Função responsável por chamar o print do Tabuleiro,
@@ -36,7 +36,7 @@ tabuleiro = fromLists
 --}
 printarTabuleiro :: Matrix Char -> IO()
 printarTabuleiro mat = do
-    putStr("   ")
+    putStr("  ")
     printarGuiaColuna mat 1
 
 {--
