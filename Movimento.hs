@@ -1,4 +1,4 @@
-module Movimento (pegaLinha, pegaColuna, pegaDirecao) where
+module Movimento (pegaLinha, pegaColuna, pegaDirecao, mapeiaLetraColuna, defineDestinoMatriz) where
 
 import Data.Char
 import Validacoes
@@ -58,3 +58,12 @@ pegaDirecao = do
             pegaDirecao
         else do
             return (read direcaoInput)
+
+{--
+    Função para definir para onde a peça será movida
+--}
+defineDestinoMatriz :: Int -> Int -> Int -> (Int,Int)
+defineDestinoMatriz linha coluna 1 = (linha - 1, coluna) 
+defineDestinoMatriz linha coluna 2 = (linha + 1, coluna) 
+defineDestinoMatriz linha coluna 3 = (linha, coluna - 1) 
+defineDestinoMatriz linha coluna 4 = (linha, coluna + 1) 
