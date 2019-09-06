@@ -1,7 +1,9 @@
 module Movimento (pegaLinha, pegaColuna, pegaDirecao, mapeiaLetraLinha, defineDestinoMatriz) where
-
+    
+import Data.Matrix
 import Data.Char
 import Validacoes
+import Tabuleiro
 
 {--
     Função para capturar o input da coluna
@@ -71,7 +73,6 @@ defineDestinoMatriz linha coluna 4 incremento = (linha, coluna + incremento)
 {--
     Função para pegar os movimentos e realizar a jogada
 --}
-
 pegaMovimento :: Matrix Char -> IO()
 pegaMovimento tabuleiro = do
     printarTabuleiro tabuleiro
