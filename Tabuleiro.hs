@@ -8,7 +8,8 @@ module Tabuleiro(
     printarLinhaAux,
     printarPosicaoAtual,
     printarLinha,
-    printarColuna
+    printarColuna,
+    verificaPecaOrigem
 ) where
 
 import Data.Matrix 
@@ -19,7 +20,7 @@ tabuleiro = fromLists
     [[' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' '],
      ['O','O','O','O','O','O','O'],
-     ['O','O','O','O','O','O','O'],
+     ['O','O','O','-','O','O','O'],
      ['O','O','O','O','O','O','O'],
      [' ',' ','O','O','O',' ',' '],
      [' ',' ','O','O','O',' ',' ']]
@@ -135,3 +136,17 @@ printarColuna mat row col = do
     printarPosicaoAtual mat row col
     printarColuna mat row (col + 1)
 
+{--
+    Verifica se posição de origem contém peça
+--}
+verificaPecaOrigem :: Matrix Char -> Int -> Int -> Char
+verificaPecaOrigem tabuleiro linha coluna = getElem linha coluna tabuleiro 
+
+{--
+    Verifica se posição de destino contém peça
+--}
+
+
+{--
+    Verifica se posição intermediária contém peça
+--}
