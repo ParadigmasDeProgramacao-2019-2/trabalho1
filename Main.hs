@@ -100,7 +100,10 @@ jogoLoop jogador tabuleiro
             pegaMovimento jogador tabuleiro
     | otherwise =
         do
-            if ((checarQuatPecas tabuleiro) ==  1) then
-                print "Parabens, ganhou"
+            if ((checarQuatPecas tabuleiro) ==  1) then do
+                print "Parabens companheiro, vc ganhou"
+                printarTabuleiro tabuleiro
             else
-                print "Perdeu"
+                do
+                    print "Perdeu meu brother"
+                    printarTabuleiro tabuleiro
