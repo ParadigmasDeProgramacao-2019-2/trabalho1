@@ -9,7 +9,8 @@ module Tabuleiro(
     printarPosicaoAtual,
     printarLinha,
     printarColuna,
-    verificaPecaOrigem
+    verificaPecaOrigem,
+    checarQuatPecas
 ) where
 
 import Data.Matrix 
@@ -150,3 +151,11 @@ verificaPecaOrigem tabuleiro linha coluna = getElem linha coluna tabuleiro
 {--
     Verifica se posição intermediária contém peça
 --}
+
+{--
+    Função para calcular quantidade de peças
+--}
+checarQuatPecas :: Matrix Char -> Int 
+checarQuatPecas tabuleiro = 
+    let listaTabuleiro = toList tabuleiro in     
+    (length [a | a <- listaTabuleiro, a == 'O']) 
