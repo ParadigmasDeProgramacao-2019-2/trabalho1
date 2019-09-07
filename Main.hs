@@ -19,12 +19,15 @@ menu = do
     system "clear" --Limpa a tela (Apenas para Ubuntu)
     putStrLn "---------------------------------- RESTA 1 ----------------------------------"
     putStr "\n\nDigite 1 para jogar"
+    putStr "\nDigite 2 para ganhar automaticamente\n\n"
     putStr "\nDigite 0 para sair\n\n"
     op <- getChar
     getChar -- descarta o Enter
     executar op
     return ()
-
+sequenciaDeVitoria :: [[Int]]
+sequenciaDeVitoria = [[2,4,2], [5,4,1], [4,6,3], [4,3,4], [2,3,2], [5,6,3], [3,1,4], [7,5,1], [3,4,3], [4,5,2], [5,1,1], [7,3,4], [3,1,4], [7,5,1], [4,3,1], [5,4,4], [3,6,3], [1,5,2], [5,7,3], [5,2,4], [5,4,4], [3,7,2], [5,7,3], [6,3,4], [6,5,1], [4,5,1], [1,3,4], [1,5,2], [3,5,3], [2,3,2], [4,2,4]]
+    
 {--
     Executa a operacao indicada pelo usuario no menu
 --}
@@ -34,6 +37,12 @@ executar '1' = do
     jogador <- cadastraJogador
     --Inicia um novo jogo
     novoJogo jogador tabuleiro
+    return ()
+executar '2' = do
+    printaRegras
+    putStr "\nPressione <Enter> para iniciar o jogo\n"
+    getChar
+    jogoVitoriaAutomatica sequenciaDeVitoria tabuleiro
     return ()
 executar '0' = do
     return ()
@@ -108,3 +117,14 @@ jogoLoop jogador tabuleiro
                 do
                     putStrLn ("Perdeu companheiro(a) " ++ (show jogador))
                     printarTabuleiro tabuleiro
+
+jogoVitoriaAutomatica :: [[Int]] -> Matrix Char -> IO()
+jogoVitoriaAutomatica [] tabuleiro = do
+    printarTabuleiro tabuleiro
+    putStrLn ("Parabenssss, voce nao venceu")
+jogoVitoriaAutomatica (x:xs) tabuleiro = do
+    let linha = x !! 0
+    let coluna = x !! 1
+    let direcao = x !! 2
+    printarTabuleiro tabuleiro
+    jogoVitoriaAutomatica xs (fazJogada linha coluna direcao tabuleiro)
