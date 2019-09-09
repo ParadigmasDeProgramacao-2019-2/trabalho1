@@ -7,7 +7,7 @@
 | Daniel Maike Mendes Gonçalves  | 16/0117003  | [DanMke](https://github.com/DanMke) | danmke@hotmail.com |
 | Gabriela Medeiros da Silva	  | 16/0121817 | [gabiMSilva](https://github.com/gabiMSilva) | gabriela.medeiros2010@hotmail.com.br |
 | Joberth Rogers Tavares Costa	  | 16/0128013	  | [joberthrogers18](https://github.com/joberthrogers18) | joberth.rogers18@gmail.com |
-| Renan Welz Schadt | 16/0143403  | [renan061](https://github.com/renan601) | welzrenan@gmail.com |
+| Renan Welz Schadt | 16/0143403  | [renan601](https://github.com/renan601) | welzrenan@gmail.com |
 
 ## Installation
 
@@ -41,3 +41,8 @@ Após compilar, rode o executavel com:
 > * ```./Main ```
 
 **E aproveite o jogo!!**
+
+## Referências
+[Resta 1 Haskell](https://github.com/ProjetoAplp/resta1-haskell)
+
+[Data.Matrix](https://hackage.haskell.org/package/matrix-0.2.2/docs/Data-Matrix.html)
