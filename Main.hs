@@ -85,7 +85,7 @@ pegaMovimento jogador tabuleiro = do
     if ((validaMovimentoDentroMatriz linha coluna direcao) == False || validaEspacoInvalido linha coluna == False)
         then do
             system("clear")
-            putStrLn "Espaço Não ultilizado no tabuleiro"
+            putStrLn "Espaço não utilizado no tabuleiro"
             putStrLn "<enter> para continuar"
             getChar 
             pegaMovimento jogador tabuleiro
